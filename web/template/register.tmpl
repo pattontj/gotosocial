@@ -1,0 +1,54 @@
+
+{{- /*
+// GoToSocial
+// Copyright (C) GoToSocial Authors admin@gotosocial.org
+// SPDX-License-Identifier: AGPL-3.0-or-later
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ template "header.tmpl" .}}
+<main>
+    <section class="register">
+        <h1>Register</h1>
+        <form action="/api/register" method="POST">
+            <div class="labelinput">
+                <label for="username">Username</label>
+                <input type="username" class="form-control" name="username" required placeholder="The desired username for the account.">
+            </div>           
+			 <div class="labelinput">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" required placeholder="The email address to be used for login.">
+            </div>
+
+			 <div class="labelinput">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" required placeholder="Please enter a password.">
+            </div>
+
+			 <div class="labelinput">
+                <label for="agreement">Agreement</label>
+                <input type="checkbox" class="form-control" name="agreement" required >
+            </div>
+
+			 <div class="labelinput">
+                <label for="locale">Locale</label>
+                <input type="text" class="form-control" name="locale" required placeholder="Please select a language.">
+            </div>
+
+			<button type="submit" class="btn btn-success">Register</button>
+        </form>
+    </section>
+</main>
+{{ template "footer.tmpl" .}}
