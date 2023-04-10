@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package web
+package auth
 
 import (
 	// "context"
@@ -24,9 +24,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	// accountcreate "github.com/superseriousbusiness/gotosocial/internal/api/client/accounts"
+	// "github.com/superseriousbusiness/gotosocial/internal/api/client/accounts"
 	// "github.com/superseriousbusiness/gotosocial/cmd/gotosocial/action/admin/account"
-	// apimodel "github.com/superseriousbusiness/gotosocial/internal/api/client/model"
+	apimodel "github.com/superseriousbusiness/gotosocial/internal/api/model"
 	apiutil "github.com/superseriousbusiness/gotosocial/internal/api/util"
 	"github.com/superseriousbusiness/gotosocial/internal/config"
 	"github.com/superseriousbusiness/gotosocial/internal/gtserror"
@@ -34,20 +34,6 @@ import (
 	// "golang.org/x/crypto/bcrypt"
 )
 
-// Wrap form values for post
-type registration struct {
-	Username  string `form:"username"`
-	Email     string `form:"email"`
-	Password  string `form:"password"`
-	Reason    string `form:"reason"`
-	Agreement bool   `form:"agreement"`
-	Locale    string `form:"locale"`
-}
-
-// SignInGETHandler should be served at https://example.org/auth/sign_in.
-// The idea is to present a sign in page to the user, where they can enter their username and password.
-// The form will then POST to the sign in page, which will be handled by SignInPOSTHandler.
-// If an idp provider is set, then the user will be redirected to that to do their sign in.
 func (m *Module) RegisterGETHandler(c *gin.Context) {
 	if _, err := apiutil.NegotiateAccept(c, apiutil.HTMLAcceptHeaders...); err != nil {
 		apiutil.ErrorHandler(c, gtserror.NewErrorNotAcceptable(err, err.Error()), m.processor.InstanceGetV1)
@@ -61,7 +47,7 @@ func (m *Module) RegisterGETHandler(c *gin.Context) {
 			return
 		}
 
-		// no idp provider, use our own funky little sign in page
+		// serve the registration page
 		c.HTML(http.StatusOK, "register.tmpl", gin.H{
 			"instance": instance,
 		})
@@ -71,17 +57,16 @@ func (m *Module) RegisterGETHandler(c *gin.Context) {
 	c.Redirect(http.StatusOK, "404.tmpl")
 }
 
-// SignInPOSTHandler should be served at https://example.org/auth/sign_in.
-// The idea is to present a sign in page to the user, where they can enter their username and password.
-// The handler will then redirect to the auth handler served at /auth
-// func (m *Module) RegisterPOSTHandler(c *gin.Context) {
+func (m *Module) RegisterPOSTHandler(c *gin.Context) {
 
-// 	form := &apimodel.AccountCreateRequest{}
+	form := &apimodel.AccountCreateRequest{}
 
-// 	if err := c.ShouldBind(form); err != nil {
-// 		// TODO: handle binding error here!
-// 		panic(err)
-// 	}
+	if err := c.ShouldBind(form); err != nil {
+		// TODO: handle binding error here!
+		panic(err)
+	}
 
-// 	c.Redirect(http.StatusFound, "404.tmpl")
-// }
+	// c.Request.URL
+
+	c.Redirect(http.StatusFound, "/api/v1/accounts")
+}

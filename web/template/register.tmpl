@@ -20,12 +20,12 @@
 
 {{ template "header.tmpl" .}}
 <main>
-    <section class="register">
+    <section class="login">
         <h1>Register</h1>
-        <form action="/api/register" method="POST">
+        <form action="/auth/register" method="POST">
             <div class="labelinput">
                 <label for="username">Username</label>
-                <input type="username" class="form-control" name="username" required placeholder="The desired username for the account.">
+                <input type="text" class="form-control" name="username" required placeholder="The desired username for the account.">
             </div>           
 			 <div class="labelinput">
                 <label for="email">Email</label>
@@ -35,6 +35,11 @@
 			 <div class="labelinput">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" required placeholder="Please enter a password.">
+            </div>
+
+            <div class="labelinput">
+                <label for="reason">Reason</label>
+                <input type="text" class="form-control" name="reason" required placeholder="Please enter a reason for joining.">
             </div>
 
 			 <div class="labelinput">

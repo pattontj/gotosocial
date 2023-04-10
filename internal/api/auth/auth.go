@@ -43,6 +43,8 @@ const (
 	AuthAccountDisabledPath = "/account_disabled"
 	// AuthCallbackPath is the API path for receiving callback tokens from external OIDC providers
 	AuthCallbackPath = "/callback"
+	// AuthRegisterPath is the API path for users to create an account through
+	AuthRegisterPath = "/register"
 
 	/*
 		paths prefixed with 'oauth'
@@ -97,6 +99,8 @@ func (m *Module) RouteAuth(attachHandler func(method string, path string, f ...g
 	attachHandler(http.MethodGet, AuthSignInPath, m.SignInGETHandler)
 	attachHandler(http.MethodPost, AuthSignInPath, m.SignInPOSTHandler)
 	attachHandler(http.MethodGet, AuthCallbackPath, m.CallbackGETHandler)
+	attachHandler(http.MethodGet, AuthRegisterPath, m.RegisterGETHandler)
+	attachHandler(http.MethodPost, AuthRegisterPath, m.RegisterPOSTHandler)
 }
 
 // RouteOauth routes all paths that should have an 'oauth' prefix

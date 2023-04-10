@@ -47,7 +47,7 @@ const (
 	userPanelPath      = settingsPathPrefix + "/user"
 	adminPanelPath     = settingsPathPrefix + "/admin"
 
-	registerPath = "register"
+	// registerPath = "register"
 
 	tokenParam  = "token"
 	usernameKey = "username"
@@ -107,7 +107,7 @@ func (m *Module) Route(r router.Router, mi ...gin.HandlerFunc) {
 	r.AttachHandler(http.MethodGet, robotsPath, m.robotsGETHandler)
 	r.AttachHandler(http.MethodGet, aboutPath, m.aboutGETHandler)
 	r.AttachHandler(http.MethodGet, domainBlockListPath, m.domainBlockListGETHandler)
-	r.AttachHandler(http.MethodGet, registerPath, m.RegisterGETHandler)
+	// r.AttachHandler(http.MethodGet, registerPath, m.RegisterGETHandler)
 
 	// Attach redirects from old endpoints to current ones for backwards compatibility
 	r.AttachHandler(http.MethodGet, "/auth/edit", func(c *gin.Context) { c.Redirect(http.StatusMovedPermanently, userPanelPath) })
