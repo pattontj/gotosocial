@@ -99,8 +99,6 @@ func (m *Module) RouteAuth(attachHandler func(method string, path string, f ...g
 	attachHandler(http.MethodGet, AuthSignInPath, m.SignInGETHandler)
 	attachHandler(http.MethodPost, AuthSignInPath, m.SignInPOSTHandler)
 	attachHandler(http.MethodGet, AuthCallbackPath, m.CallbackGETHandler)
-	attachHandler(http.MethodGet, AuthRegisterPath, m.RegisterGETHandler)
-	attachHandler(http.MethodPost, AuthRegisterPath, m.RegisterPOSTHandler)
 }
 
 // RouteOauth routes all paths that should have an 'oauth' prefix
