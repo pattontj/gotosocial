@@ -83,6 +83,25 @@ skulk({
 				}]
 			]
 		},
+
+		register: {
+			entryFile: "register",
+			outputFile: "register.js",
+			prodCfg: prodCfg,
+			transform: [
+				["babelify", {
+					global: true,
+					ignore: [/node_modules\/(?!nanoid)/]
+				}]
+			],
+			presets: [
+				"react",
+				["postcss", {
+					output: "settings-style.css"
+				}]
+			]
+		},
+		
 		css: {
 			entryFiles: cssEntryFiles,
 			outputFile: "_discard",

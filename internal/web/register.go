@@ -48,8 +48,9 @@ func (m *Module) RegisterGETHandler(c *gin.Context) {
 		}
 
 		// serve the registration page
-		c.HTML(http.StatusOK, "register.tmpl", gin.H{
+		c.HTML(http.StatusOK, "frontend.tmpl", gin.H{
 			"instance": instance,
+			"javascript": []string{distPathPrefix + "/register.js"},
 		})
 		return
 	}
